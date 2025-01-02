@@ -111,10 +111,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="(profile)"
         options={{
-          title: "profile",
-          headerShown: false,
+          title: "",
           tabBarShowLabel: false,
           headerTitleStyle: {
             color: theme.colorWhite,
@@ -127,6 +126,12 @@ export default function TabLayout() {
           },
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user-circle" size={24} color="white" />
+          ),
+          headerRight: () => (
+            <TouchableOpacity className="pr-4 flex flex-row items-center gap-x-6">
+              <Ionicons name="settings-outline" size={28} color="white" />
+              <Ionicons name="notifications-outline" size={28} color="white" />
+            </TouchableOpacity>
           ),
         }}
       />

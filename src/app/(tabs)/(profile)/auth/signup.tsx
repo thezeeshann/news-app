@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Premium() {
+//(tabs)/profile/auth/signin
+export default function Signup() {
   return (
     <View style={styles.container}>
-      <Text className="font-bold text-red-500">
-        Open up App.tsx to start working on your app!
-      </Text>
+      <Text className="font-bold text-red-500">sign up</Text>
       <StatusBar style="auto" />
     </View>
   );

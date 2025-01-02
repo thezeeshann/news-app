@@ -6,7 +6,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function NewCard() {
   return (
-    <View className="">
+    <View className=" ">
       <Image
         source={{
           uri: "https://cdn.britannica.com/65/194465-050-50F2A305/Vladimir-Putin-questions-news-conference-2016.jpg",

@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Library() {
+export default function Recommend() {
   return (
     <View style={styles.container}>
       <Text className="font-bold text-red-500">
