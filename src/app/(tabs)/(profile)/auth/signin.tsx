@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, TextInput, View } from "react-native";
+import { Link } from "expo-router";
+import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -18,7 +19,7 @@ export default function Signin() {
           <Ionicons name="people" size={28} color="white" />
         </View>
       </View>
-      <View className="flex flex-col mt-10 space-y-4">
+      <View className="flex flex-col mt-10 gap-y-4">
         <TextInput
           placeholder="Enter email address"
           className="border-red-500 border-[1px] placeholder:text-white"
@@ -28,6 +29,14 @@ export default function Signin() {
           className="border-red-500 border-[1px] placeholder:text-white"
         />
       </View>
+      <TouchableOpacity className="px-4 py-2 mt-5 border-[1px] border-white rounded-full w-72 mx-auto">
+        <Text className="text-center text-white">Sing In</Text>
+      </TouchableOpacity>
+      <Link href={"/auth/signup"} asChild>
+        <Text className="mt-5 text-center text-white">
+          Don't have account sing up here
+        </Text>
+      </Link>
     </View>
   );
 }
