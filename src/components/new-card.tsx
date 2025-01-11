@@ -4,21 +4,21 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-export default function NewCard() {
+export default function NewCard({ item }) {
+  console.log(item, "item-data");
+
   return (
-    <View className=" ">
+    <View className="border-2 border-red-500">
       <Image
         source={{
-          uri: "https://cdn.britannica.com/65/194465-050-50F2A305/Vladimir-Putin-questions-news-conference-2016.jpg",
+          uri: item.image,
         }}
         className="w-[100%] h-[300px]"
       />
-      <Text className="mt-1 text-xl font-bold text-white">
-        Vladimir Putin | Biography, KGB, Political Career, & Facts
-      </Text>
+      <Text className="mt-1 text-xl font-bold text-white">{item.title}</Text>
       <View className="flex flex-row items-center justify-between mt-1 ">
         <View className="flex-row items-center gap-x-1">
-          <Text className="text-white">NDTV</Text>
+          <Text className="text-white">{item.author.fullName}</Text>
           <AntDesign name="checkcircleo" size={12} color="white" />
           <Entypo name="dot-single" size={12} color="white" />
           <Text className="text-white">now</Text>
