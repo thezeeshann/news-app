@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NewCard from "@/src/components/new-card";
 import { getPost } from "@/src/lib/api/post";
@@ -25,15 +25,12 @@ export default function App() {
 
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
-      {/* <ScrollView> */}
       <StatusBar style="light" />
-
       <FlatList
         data={postData}
         renderItem={({ item }) => <NewCard item={item} />}
         keyExtractor={(item) => item.id}
       />
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 }

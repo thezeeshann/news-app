@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import CustomTextInput from "@/src/components/custom-text-input";

@@ -1,12 +1,36 @@
 import { StatusBar } from "expo-status-bar";
 import { Link } from "expo-router";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { signin } from "@/src/lib/api/auth";
+import { signinSchema, signinType } from "@/src/lib/schema/signin";
+import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import CustomTextInput from "@/src/components/custom-text-input";
+import { storeDataInStore } from "@/src/lib/store";
 
 export default function Signin() {
+  const form = useForm<signinType>({
+    resolver: zodResolver(signinSchema),
+  });
+
+  const onSubmit: SubmitHandler<signinType> = async (data) => {
+    try {
+      const response = await signin(data);
+      if (response.success) {
+        console.log("Signup successful:", response);
+        const { token, existUser } = response;
+        await storeDataInStore("authToken", token);
+        await storeDataInStore("existUser", existUser);
+      }
+    } catch (error) {
+      console.error("Signup failed:", error);
+    }
+  };
+
   return (
-    <View className="h-full px-4 pt-4 border-2 border-red-500 bg-[#27272a]">
+    <View className="h-full px-4 pt-4  bg-[#27272a]">
       <StatusBar style="light" />
       <View>
         <Text className="mt-5 font-semibold text-center text-white">
@@ -19,19 +43,29 @@ export default function Signin() {
           <Ionicons name="people" size={28} color="white" />
         </View>
       </View>
-      <View className="flex flex-col mt-10 gap-y-4">
-        <TextInput
-          placeholder="Enter email address"
-          className="border-red-500 border-[1px] placeholder:text-white"
-        />
-        <TextInput
-          placeholder="Enter Password"
-          className="border-red-500 border-[1px] placeholder:text-white"
-        />
-      </View>
-      <TouchableOpacity className="px-4 py-2 mt-5 border-[1px] border-white rounded-full w-72 mx-auto">
-        <Text className="text-center text-white">Sing In</Text>
-      </TouchableOpacity>
+      <FormProvider {...form}>
+        <View className="flex flex-col">
+          <CustomTextInput
+            name="email"
+            label="Email"
+            placeholder="Enter email address"
+            className=" placeholder:text-white"
+          />
+
+          <CustomTextInput
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+            className=" placeholder:text-white"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={form.handleSubmit(onSubmit)}
+          className="px-4 py-2 mt-5 border-[1px] border-white rounded-full w-72 mx-auto"
+        >
+          <Text className="text-center text-white">Sing In</Text>
+        </TouchableOpacity>
+      </FormProvider>
       <Link href={"/auth/signup"} asChild>
         <Text className="mt-5 text-center text-white">
           Don't have account sing up here
