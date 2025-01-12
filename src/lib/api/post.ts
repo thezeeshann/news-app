@@ -14,7 +14,7 @@ export const getPost = async () => {
     }
 
     const result = await response.json();
-    return result.data; // Extract only the posts data
+    return result.data;
   } catch (error) {
     console.error("Signup API error:", error);
     throw error;
