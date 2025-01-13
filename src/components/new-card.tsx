@@ -3,12 +3,14 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { StatusBar } from "expo-status-bar";
 
 export default function NewCard({ item }) {
   console.log(item, "item-data");
 
   return (
-    <View className="border-2 border-red-500">
+    <View className="">
+      <StatusBar style="light" />
       <Image
         source={{
           uri: item.image,
