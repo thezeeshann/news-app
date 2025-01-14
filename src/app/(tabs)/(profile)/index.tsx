@@ -36,14 +36,20 @@ export default function Profile() {
       <StatusBar style="light" />
       <View className="flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-x-2">
-          <Image
-            className="w-[80px] h-[80px] rounded-full"
-            source={{
-              uri: userData
-                ? userData.profile
-                : "../../../../assets/person2.webp",
-            }}
-          />
+          {userData && token ? (
+            <Image
+              className="w-[80px] h-[80px] rounded-full"
+              source={{
+                uri: userData.profile,
+              }}
+            />
+          ) : (
+            <Image
+              className="w-[80px] h-[80px] rounded-full"
+              source={require("../../../../assets/person2.webp")}
+            />
+          )}
+
           <View className="flex flex-col">
             <Text className="font-bold text-white">
               {userData ? userData.fullName : "Add you name"}

@@ -4,6 +4,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { StatusBar } from "expo-status-bar";
+import { Link } from "expo-router";
 
 export default function NewCard({ item }) {
   console.log(item, "item-data");
@@ -11,12 +12,14 @@ export default function NewCard({ item }) {
   return (
     <View className="">
       <StatusBar style="light" />
-      <Image
-        source={{
-          uri: item.image,
-        }}
-        className="w-[100%] h-[300px]"
-      />
+      <Link href={`post/${item.id}`}>
+        <Image
+          source={{
+            uri: item.image,
+          }}
+          className="w-[100%] h-[300px]"
+        />
+      </Link>
       <Text className="mt-1 text-xl font-bold text-white">{item.title}</Text>
       <View className="flex flex-row items-center justify-between mt-1 ">
         <View className="flex-row items-center gap-x-1">

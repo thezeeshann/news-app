@@ -4,11 +4,11 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { theme } from "@/src/lib/theme";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import PostContextProvider from "@/src/context/post-context";
+import AppContextProvider from "@/src/context/app-context";
 
 export default function TabLayout() {
   return (
-    <PostContextProvider>
+    <AppContextProvider>
       <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorBlack }}>
         <Tabs.Screen
           name="index"
@@ -146,6 +146,6 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-    </PostContextProvider>
+    </AppContextProvider>
   );
 }

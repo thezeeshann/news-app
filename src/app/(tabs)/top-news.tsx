@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, Text, View, ScrollView, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { PostContext } from "@/src/context/post-context";
+import { AppContext } from "@/src/context/app-context";
 import { useContext } from "react";
 
 export default function TopNews() {
-  const { postData } = useContext(PostContext);
+  const { postData } = useContext(AppContext);
 
   console.log(postData, "in top news");
 
