@@ -5,21 +5,14 @@ export default function ProfileLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen
-        name="auth/signin"
+        name="signin"
         options={{
           headerShown: false,
           presentation: "modal",
         }}
       />
       <Stack.Screen
-        name="auth/signup"
-        options={{
-          headerShown: false,
-          presentation: "modal",
-        }}
-      />
-      <Stack.Screen
-        name="post/[postId]"
+        name="signup"
         options={{
           headerShown: false,
           presentation: "modal",

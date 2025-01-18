@@ -11,7 +11,7 @@ export default function TabLayout() {
     <AppContextProvider>
       <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorBlack }}>
         <Tabs.Screen
-          name="index"
+          name="(home)"
           options={{
             title: "dailyhunt",
             tabBarShowLabel: false,
@@ -113,6 +113,16 @@ export default function TabLayout() {
             },
             tabBarIcon: ({ size, color }) => (
               <Entypo name="star" size={24} color="white" />
+            ),
+
+            headerRight: () => (
+              <TouchableOpacity className="border-red-500 bordre-2">
+                <Ionicons
+                  name="notifications-outline"
+                  size={24}
+                  color="white"
+                />
+              </TouchableOpacity>
             ),
           }}
         />

@@ -5,12 +5,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getSinglePost } from "@/src/lib/api/post";
 import { useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Entypo from "@expo/vector-icons/Entypo";
 
 export default function SinglePost() {
   const { postId } = useLocalSearchParams();
   const [singlePost, setSinglePost] = useState();
-
-  console.log("post-id", postId);
 
   useEffect(() => {
     const fetchSingleData = async () => {
@@ -34,8 +33,11 @@ export default function SinglePost() {
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
       <StatusBar style="auto" />
-      <ScrollView>
-        <View className="border-2 border-red-500">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <View className="">
           <Image source={{ uri: singlePost?.image }} className="h-60 w-60" />
           <Text className="p-2 text-xl font-bold text-white">
             {singlePost?.title}
@@ -45,9 +47,9 @@ export default function SinglePost() {
           </Text>
         </View>
 
-        <View className="flex flex-row items-center justify-between border-2 border-red-500">
+        <View className="flex flex-row items-center justify-between mt-5">
           <View>
-            <Text className="text-white">India.com</Text>
+            <Text className="text-white">{singlePost?.author?.fullName}</Text>
             <Text className="text-white">1.4 Miilons</Text>
           </View>
           <View className="px-4 py-2 bg-white">
@@ -56,8 +58,8 @@ export default function SinglePost() {
         </View>
 
         <View className="mt-5">
-          <Text className="text-lg font-bold text-white">Comments 16</Text>
-          <View className="flex flex-row items-center border-2 border-red-500 gap-x-2">
+          <Text className="text-lg font-bold text-white">Comments 2</Text>
+          <View className="flex flex-row items-center mt-5 gap-x-2">
             <Image
               className="rounded-full w-14 h-14"
               source={{
@@ -67,40 +69,45 @@ export default function SinglePost() {
             {/* <CustomTextInput name="comment" placeholder="Add a comment" /> */}
             <TextInput
               placeholder="Add a comment"
-              className="bg-gray-600 placeholder:text-white"
+              className="w-full text-white bg-gray-600 rounded text-whtie"
             />
           </View>
-
-          <View>
-            <View className="flex flex-row items-center border-2 border-red-500 ">
-              <Image
-                className="rounded-full w-14 h-14"
-                source={{
-                  uri: "https://w0.peakpx.com/wallpaper/715/447/HD-wallpaper-muhammad-ali-boxing-fight-mma-ufc-thumbnail.jpg",
-                }}
-              />
-              <Text className="text-sm text-white">User Name 1</Text>
-              <Text className="text-sm text-gray-400">10 min ago</Text>
-            </View>
-          </View>
         </View>
 
-        <View className="mt-2 border-2 border-red-500">
-          <Text className="text-white">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            sapiente consequuntur expedita exercitationem quae hic excepturi
-            provident sit nisi nobis.
-          </Text>
-          <View className="flex flex-row items-center justify-between border-2 border-red-500">
-            <View className="flex flex-row items-center gap-x-4">
-              <AntDesign name="like2" size={24} color="white" />
-              <AntDesign name="dislike2" size={24} color="white" />
+        {singlePost?.comments.map((comment) => (
+          <View key={comment.id} className="flex flex-col py-2 mt-3 gap-y-2">
+            <View className="flex flex-row items-center justify-between ">
+              <View className="flex flex-row items-start gap-x-4">
+                <Image
+                  className="border-2 border-white rounded-full w-14 h-14"
+                  source={{
+                    uri: "https://w0.peakpx.com/wallpaper/715/447/HD-wallpaper-muhammad-ali-boxing-fight-mma-ufc-thumbnail.jpg",
+                  }}
+                />
+                <View className="flex flex-col items-center gap-x-2">
+                  <Text className="text-lg font-semibold text-white ">
+                    {comment?.user?.fullName}
+                  </Text>
+                  <Text className="text-sm text-gray-400">10 min ago</Text>
+                </View>
+              </View>
+
+              <Entypo name="dots-three-vertical" size={20} color="white" />
             </View>
-            <View className="px-4 py-2 bg-gray-500">
-              <Text className="text-white">Reply</Text>
+            <View>
+              <Text className="text-white">{comment.title}</Text>
+              <View className="flex flex-row items-center justify-between mt-3">
+                <View className="flex flex-row items-center gap-x-4">
+                  <AntDesign name="like2" size={24} color="white" />
+                  <AntDesign name="dislike2" size={24} color="white" />
+                </View>
+                <View className="px-4 py-2 bg-gray-500">
+                  <Text className="text-white">Reply</Text>
+                </View>
+              </View>
             </View>
           </View>
-        </View>
+        ))}
       </ScrollView>
     </SafeAreaView>
   );

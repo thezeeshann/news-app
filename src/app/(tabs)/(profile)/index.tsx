@@ -70,7 +70,7 @@ export default function Profile() {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
-            onPress={() => router.push("/auth/signin")}
+            onPress={() => router.push("/signin")}
             className="px-4 py-1 border-2 border-white"
           >
             <Text className="text-white">Log in</Text>

@@ -63,7 +63,7 @@ export default function Signup() {
           <Text className="text-center text-white">Sing Up</Text>
         </TouchableOpacity>
       </FormProvider>
-      <Link href={"/auth/signup"} asChild>
+      <Link href={"/signin"} asChild>
         <Text className="mt-5 text-center text-white">
           Don't have account sing up here
         </Text>
