@@ -14,6 +14,11 @@ export default function TabLayout() {
           name="(home)"
           options={{
             title: "dailyhunt",
+            headerTitleStyle: {
+              color: theme.colorWhite,
+              fontWeight: "bold",
+              fontSize: 25,
+            },
             tabBarShowLabel: false,
             tabBarStyle: {
               backgroundColor: theme.colorBlack,
@@ -99,15 +104,17 @@ export default function TabLayout() {
         <Tabs.Screen
           name="recommend"
           options={{
-            title: "recommend",
-            headerShown: false,
-            tabBarShowLabel: false,
+            title: "dailyhunt",
             headerTitleStyle: {
               color: theme.colorWhite,
+              fontWeight: "bold",
+              fontSize: 25,
             },
+            tabBarShowLabel: false,
             tabBarStyle: {
               backgroundColor: theme.colorBlack,
             },
+            headerTintColor: "white",
             headerStyle: {
               backgroundColor: theme.colorBlack,
             },
@@ -116,7 +123,7 @@ export default function TabLayout() {
             ),
 
             headerRight: () => (
-              <TouchableOpacity className="border-red-500 bordre-2">
+              <TouchableOpacity className="pr-2">
                 <Ionicons
                   name="notifications-outline"
                   size={24}
