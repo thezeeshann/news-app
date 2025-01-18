@@ -1,5 +1,11 @@
-import { View, Text, ScrollView, Image, TextInput } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TextInput,
+  StatusBar,
+} from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getSinglePost } from "@/src/lib/api/post";
@@ -32,7 +38,11 @@ export default function SinglePost() {
 
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
-      <StatusBar style="auto" />
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle={"light-content"}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}

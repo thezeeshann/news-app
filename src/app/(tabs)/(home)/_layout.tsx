@@ -1,7 +1,4 @@
-import { AntDesign } from "@expo/vector-icons";
-import { Link, Stack } from "expo-router";
-import { Pressable } from "react-native";
-import { theme } from "@/src/lib/theme";
+import { Stack } from "expo-router";
 
 export default function Layout() {
   return (
@@ -9,26 +6,19 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Home",
-          // headerRight: () => (
-          //   <Link href="/new" asChild>
-          //     <Pressable hitSlop={20}>
-          //       <AntDesign
-          //         name="pluscircleo"
-          //         size={24}
-          //         color={theme.colorGreen}
-          //       />
-          //     </Pressable>
-          //   </Link>
-          // ),
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="post/[postId]"
         options={{
           title: "",
-          // headerBackTitleVisible: false,
-          headerTintColor: theme.colorBlack,
+          headerTintColor: "white",
+          headerTransparent: true,
+          headerStyle: {
+            backgroundColor: "transparent",
+          },
+          presentation: "modal",
         }}
       />
     </Stack>
