@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NewCard from "@/src/components/new-card";
 import { AppContext } from "@/src/context/app-context";
@@ -12,7 +11,11 @@ export default function App() {
 
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
-      <StatusBar style="light" />
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle={"light-content"}
+      />
       <FlatList
         data={postData}
         renderItem={({ item }) => <NewCard item={item} />}

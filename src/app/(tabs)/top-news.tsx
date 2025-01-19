@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { Image, Text, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppContext } from "@/src/context/app-context";
@@ -9,7 +8,6 @@ export default function TopNews() {
 
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
-      <StatusBar style="light" />
       <FlatList
         data={postData}
         keyExtractor={(item) => item.id}
