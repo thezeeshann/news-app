@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList } from "react-native";
+import { FlatList, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NewCard from "@/src/components/new-card";
 import { AppContext } from "@/src/context/app-context";
@@ -17,6 +17,13 @@ export default function App() {
         data={postData}
         renderItem={({ item }) => <NewCard item={item} />}
         keyExtractor={(item) => item.id}
+        ListEmptyComponent={
+          <View className="flex items-center justify-center mt-10">
+            <Text className="font-semibold text-white ">
+              No posts available.
+            </Text>
+          </View>
+        }
       />
     </SafeAreaView>
   );

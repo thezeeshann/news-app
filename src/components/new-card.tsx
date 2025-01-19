@@ -7,8 +7,6 @@ import { StatusBar } from "expo-status-bar";
 import { Link } from "expo-router";
 
 export default function NewCard({ item }) {
-  console.log(item, "item-data");
-
   return (
     <View className="">
       <StatusBar style="light" />
