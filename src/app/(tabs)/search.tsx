@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
 export default function Search() {
+  const [first, setfirst] = useState("");
+
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
       <StatusBar style="light" />

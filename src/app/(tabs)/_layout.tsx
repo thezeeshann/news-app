@@ -9,7 +9,7 @@ import AppContextProvider from "@/src/context/app-context";
 export default function TabLayout() {
   return (
     <AppContextProvider>
-      <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorBlack }}>
+      <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorWhite }}>
         <Tabs.Screen
           name="(home)"
           options={{
@@ -28,7 +28,7 @@ export default function TabLayout() {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <Entypo name="home" size={24} color="white" />
+              <Entypo name="home" size={24} color={color} />
             ),
             headerRight: () => (
               <TouchableOpacity className="pr-2">
@@ -57,7 +57,7 @@ export default function TabLayout() {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <FontAwesome name="search" size={24} color="white" />
+              <FontAwesome name="search" size={24} color={color} />
             ),
           }}
         />
@@ -77,27 +77,39 @@ export default function TabLayout() {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <Entypo name="news" size={24} color="white" />
+              <Entypo name="news" size={24} color={color} />
             ),
           }}
         />
         <Tabs.Screen
           name="news-video"
           options={{
-            title: "video",
-            headerShown: false,
-            tabBarShowLabel: false,
+            title: "dailyhunt",
             headerTitleStyle: {
               color: theme.colorWhite,
+              fontWeight: "bold",
+              fontSize: 25,
             },
+            tabBarShowLabel: false,
             tabBarStyle: {
               backgroundColor: theme.colorBlack,
             },
+            headerTintColor: "white",
             headerStyle: {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <Entypo name="video" size={24} color="white" />
+              <Entypo name="video" size={24} color={color} />
+            ),
+
+            headerRight: () => (
+              <TouchableOpacity className="pr-2">
+                <Ionicons
+                  name="notifications-outline"
+                  size={24}
+                  color="white"
+                />
+              </TouchableOpacity>
             ),
           }}
         />
@@ -119,7 +131,7 @@ export default function TabLayout() {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <Entypo name="star" size={24} color="white" />
+              <Entypo name="star" size={24} color={color} />
             ),
 
             headerRight: () => (
@@ -148,7 +160,7 @@ export default function TabLayout() {
               backgroundColor: theme.colorBlack,
             },
             tabBarIcon: ({ size, color }) => (
-              <FontAwesome name="user-circle" size={24} color="white" />
+              <FontAwesome name="user-circle" size={24} color={color} />
             ),
             headerRight: () => (
               <TouchableOpacity className="flex flex-row items-center pr-4 gap-x-6">

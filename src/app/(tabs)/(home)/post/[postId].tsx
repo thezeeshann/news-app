@@ -1,21 +1,50 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TextInput,
-  StatusBar,
-} from "react-native";
+import { View, Text, ScrollView, Image, StatusBar } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getSinglePost } from "@/src/lib/api/post";
 import { useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
+import CustomTextInput from "@/src/components/custom-text-input";
+import { commentSchema, commentType } from "@/src/lib/schema/comment";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createComment } from "@/src/lib/api/comment";
+import { getDataFromStore } from "@/src/lib/store";
+import { TouchableOpacity } from "react-native";
 
 export default function SinglePost() {
   const { postId } = useLocalSearchParams();
   const [singlePost, setSinglePost] = useState();
+
+  const form = useForm<commentType>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      title: "",
+      postId: postId as string,
+    },
+  });
+
+  const onSubmit: SubmitHandler<commentType> = async (data) => {
+    const token = await getDataFromStore("authToken");
+    console.log("Retrieved token:", token);
+    if (!token) {
+      console.warn("User not authenticated. Please sign in.");
+      return;
+    }
+    try {
+      const commentData = {
+        ...data,
+        postId: postId as string,
+      };
+
+      const comment = await createComment(commentData, token);
+      console.log("Comment created:", comment);
+      data.title = "";
+    } catch (error) {
+      console.error("Error creating comment:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchSingleData = async () => {
@@ -27,7 +56,6 @@ export default function SinglePost() {
         console.log(`Fetching post with ID: ${postId}`);
         const data = await getSinglePost(postId);
         setSinglePost(data);
-        console.log("Single post data:", data);
       } catch (error) {
         console.error("Error fetching single post:", error);
       }
@@ -67,7 +95,7 @@ export default function SinglePost() {
           </View>
         </View>
 
-        <View className="mt-5">
+        <View className="mt-5 ">
           <Text className="text-lg font-bold text-white">Comments 2</Text>
           <View className="flex flex-row items-center mt-5 gap-x-2">
             <Image
@@ -76,11 +104,20 @@ export default function SinglePost() {
                 uri: "https://w0.peakpx.com/wallpaper/715/447/HD-wallpaper-muhammad-ali-boxing-fight-mma-ufc-thumbnail.jpg",
               }}
             />
-            {/* <CustomTextInput name="comment" placeholder="Add a comment" /> */}
-            <TextInput
-              placeholder="Add a comment"
-              className="w-full text-white bg-gray-600 rounded text-whtie"
-            />
+
+            <FormProvider {...form}>
+              <CustomTextInput
+                name="title"
+                placeholder="Add a comment"
+                className="placeholder:text-white"
+              />
+              <TouchableOpacity
+                onPress={form.handleSubmit(onSubmit)}
+                className="px-4 py-2 bg-gray-500"
+              >
+                <Text className="text-white">Reply</Text>
+              </TouchableOpacity>
+            </FormProvider>
           </View>
         </View>
 

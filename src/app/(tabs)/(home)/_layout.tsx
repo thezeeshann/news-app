@@ -13,6 +13,7 @@ export default function Layout() {
         name="post/[postId]"
         options={{
           title: "",
+          headerShown: false,
           headerTintColor: "white",
           headerTransparent: true,
           headerStyle: {
