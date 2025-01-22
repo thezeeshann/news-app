@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image, StatusBar } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getSinglePost } from "@/src/lib/api/post";
 import { useEffect, useState } from "react";
@@ -27,10 +27,9 @@ export default function SinglePost() {
 
   const onSubmit: SubmitHandler<commentType> = async (data) => {
     const token = await getDataFromStore("authToken");
-    console.log("Retrieved token:", token);
-    if (!token) {
-      console.warn("User not authenticated. Please sign in.");
-      return;
+    const existUser = await getDataFromStore("existUser");
+    if (!token && !existUser) {
+      router.navigate("/signin");
     }
     try {
       const commentData = {
@@ -53,7 +52,6 @@ export default function SinglePost() {
           console.warn("Invalid postId");
           return;
         }
-        console.log(`Fetching post with ID: ${postId}`);
         const data = await getSinglePost(postId);
         setSinglePost(data);
       } catch (error) {

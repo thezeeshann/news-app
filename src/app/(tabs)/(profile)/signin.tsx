@@ -9,6 +9,7 @@ import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomTextInput from "@/src/components/custom-text-input";
 import { storeDataInStore } from "@/src/lib/store";
+import { router } from "expo-router";
 
 export default function Signin() {
   const form = useForm<signinType>({
@@ -23,6 +24,9 @@ export default function Signin() {
         const { token, existUser } = response;
         await storeDataInStore("authToken", token);
         await storeDataInStore("existUser", existUser);
+        console.log("token", token);
+        console.log("existUser", existUser);
+        router.navigate("/");
       }
     } catch (error) {
       console.error("Signup failed:", error);
@@ -68,7 +72,8 @@ export default function Signin() {
       </FormProvider>
       <Link href={"/signup"} asChild>
         <Text className="mt-5 text-center text-white">
-          Don't have account sing up here
+          Don't have account?{" "}
+          <Text className="font-bold underline">sing up</Text> here
         </Text>
       </Link>
     </View>

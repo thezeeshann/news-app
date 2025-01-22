@@ -65,7 +65,8 @@ export default function Signup() {
       </FormProvider>
       <Link href={"/signin"} asChild>
         <Text className="mt-5 text-center text-white">
-          Don't have account sing up here
+          Already have an account?{" "}
+          <Text className="font-bold underline">sing in</Text> here
         </Text>
       </Link>
     </View>

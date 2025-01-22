@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Image, Text, View, TouchableOpacity, Alert } from "react-native";
+import { Image, Text, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getDataFromStore, removeDataFromStore } from "@/src/lib/store";
 import { useEffect, useState } from "react";
@@ -142,7 +142,10 @@ export default function Profile() {
             <Text className="text-white">You have not posted</Text>
             <Text className="text-white">anything for a while</Text>
           </View>
-          <TouchableOpacity className="px-6 py-3 border-2 border-white">
+          <TouchableOpacity
+            onPress={() => router.push("/create-post")}
+            className="px-6 py-3 border-2 border-white"
+          >
             <Text className="text-white">Create a post</Text>
           </TouchableOpacity>
         </View>

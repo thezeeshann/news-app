@@ -18,6 +18,13 @@ export default function ProfileLayout() {
           presentation: "modal",
         }}
       />
+      <Stack.Screen
+        name="create-post"
+        options={{
+          headerShown: false,
+          presentation: "modal",
+        }}
+      />
     </Stack>
   );
 }
