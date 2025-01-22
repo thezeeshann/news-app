@@ -82,38 +82,6 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="news-video"
-          options={{
-            title: "dailyhunt",
-            headerTitleStyle: {
-              color: theme.colorWhite,
-              fontWeight: "bold",
-              fontSize: 25,
-            },
-            tabBarShowLabel: false,
-            tabBarStyle: {
-              backgroundColor: theme.colorBlack,
-            },
-            headerTintColor: "white",
-            headerStyle: {
-              backgroundColor: theme.colorBlack,
-            },
-            tabBarIcon: ({ size, color }) => (
-              <Entypo name="video" size={24} color={color} />
-            ),
-
-            headerRight: () => (
-              <TouchableOpacity className="pr-2">
-                <Ionicons
-                  name="notifications-outline"
-                  size={24}
-                  color="white"
-                />
-              </TouchableOpacity>
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="recommend"
           options={{
             title: "dailyhunt",
