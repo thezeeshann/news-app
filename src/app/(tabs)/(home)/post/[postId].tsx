@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Image, StatusBar } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getSinglePost } from "@/src/lib/api/post";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import CustomTextInput from "@/src/components/custom-text-input";
@@ -10,12 +10,18 @@ import { commentSchema, commentType } from "@/src/lib/schema/comment";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createComment } from "@/src/lib/api/comment";
-import { getDataFromStore } from "@/src/lib/store";
+import { getDataFromStore, storeDataInStore } from "@/src/lib/store";
 import { TouchableOpacity } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { AppContext } from "@/src/context/app-context";
 
 export default function SinglePost() {
   const { postId } = useLocalSearchParams();
   const [singlePost, setSinglePost] = useState();
+  const [isSaved, setIsSaved] = useState(false);
+  const { userData } = useContext(AppContext);
+  const { token, existUser } = userData || {};
 
   const form = useForm<commentType>({
     resolver: zodResolver(commentSchema),
@@ -25,9 +31,32 @@ export default function SinglePost() {
     },
   });
 
+  const checkIfPostIsSaved = async () => {
+    const savedPosts = await getDataFromStore("savedPosts");
+    setIsSaved(savedPosts.includes(postId));
+  };
+
+  const handleSavePost = async () => {
+    if (!token || !existUser) {
+      router.push("/signin");
+      return;
+    }
+
+    const savedPosts = await getDataFromStore("savedPosts");
+    let newSavedPosts;
+
+    if (isSaved) {
+      newSavedPosts = savedPosts.filter((id: string) => id !== postId);
+    } else {
+      newSavedPosts = [...savedPosts, postId];
+      console.log("Post saved successfully");
+    }
+
+    await storeDataInStore("savedPosts", newSavedPosts);
+    setIsSaved(!isSaved);
+  };
+
   const onSubmit: SubmitHandler<commentType> = async (data) => {
-    const token = await getDataFromStore("authToken");
-    const existUser = await getDataFromStore("existUser");
     if (!token && !existUser) {
       router.navigate("/signin");
     }
@@ -46,6 +75,8 @@ export default function SinglePost() {
   };
 
   useEffect(() => {
+    checkIfPostIsSaved();
+
     const fetchSingleData = async () => {
       try {
         if (!postId) {
@@ -63,7 +94,7 @@ export default function SinglePost() {
   }, [postId]);
 
   return (
-    <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
+    <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full ">
       <StatusBar
         backgroundColor="transparent"
         translucent={true}
@@ -74,10 +105,30 @@ export default function SinglePost() {
         showsHorizontalScrollIndicator={false}
       >
         <View className="">
-          <Image source={{ uri: singlePost?.image }} className="h-60 w-60" />
-          <Text className="p-2 text-xl font-bold text-white">
-            {singlePost?.title}
-          </Text>
+          <Image
+            source={{ uri: singlePost?.image }}
+            className="h-80 w-full border-2 border-red-500"
+          />
+          <View className="flex flex-row items-center justify-between mt-2">
+            <Text className="p-2 text-xl font-bold text-white">
+              {singlePost?.title}
+            </Text>
+            {isSaved ? (
+              <FontAwesome
+                onPress={handleSavePost}
+                name="bookmark"
+                size={24}
+                color="white"
+              />
+            ) : (
+              <Feather
+                onPress={handleSavePost}
+                name="bookmark"
+                size={24}
+                color="white"
+              />
+            )}
+          </View>
           <Text className="p-2 text-lg text-gray-400">
             {singlePost?.content}
           </Text>

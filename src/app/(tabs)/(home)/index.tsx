@@ -3,17 +3,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import NewCard from "@/src/components/new-card";
 import { AppContext } from "@/src/context/app-context";
 import { useContext } from "react";
+import TopNavbar from "@/src/components/top-navbar";
 
 export default function App() {
-  const { postData, comments } = useContext(AppContext);
+  const { postData } = useContext(AppContext);
 
   return (
     <SafeAreaView className="bg-[#27272a] pt-0 px-4 h-full">
+      <TopNavbar />
       <StatusBar
         backgroundColor="transparent"
         translucent={true}
         barStyle={"light-content"}
       />
+
       <FlatList
         data={postData}
         renderItem={({ item }) => <NewCard item={item} />}
