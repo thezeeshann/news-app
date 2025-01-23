@@ -142,3 +142,74 @@ export const recommendedSources = [
     image: "https://storage.googleapis.com/media-news/59456-Zee-News.jpg",
   },
 ];
+
+export const navData = [
+  {
+    id: 1,
+    name: "For You",
+  },
+  {
+    id: 2,
+    name: "News",
+  },
+  {
+    id: 3,
+    name: "Cricket",
+  },
+  {
+    id: 4,
+    name: "Foodball",
+  },
+  {
+    id: 5,
+    name: "Mobiles and Gadgets",
+  },
+  {
+    id: 6,
+    name: "Followings",
+  },
+  {
+    id: 7,
+    name: "Trending",
+  },
+  {
+    id: 8,
+    name: "Sports",
+  },
+  {
+    id: 9,
+    name: "Entertainment",
+  },
+  {
+    id: 10,
+    name: "Lifestyle",
+  },
+  {
+    id: 11,
+    name: "Educatoin and Employment",
+  },
+  {
+    id: 12,
+    name: "Automobile",
+  },
+  {
+    id: 13,
+    name: "Business",
+  },
+  {
+    id: 14,
+    name: "Gadgets",
+  },
+  {
+    id: 15,
+    name: "Politics",
+  },
+  {
+    id: 16,
+    name: "Cricket",
+  },
+  {
+    id: 17,
+    name: "World",
+  },
+];
