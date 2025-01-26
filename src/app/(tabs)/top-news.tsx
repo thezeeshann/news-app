@@ -14,7 +14,7 @@ export default function TopNews() {
         renderItem={({ item }) => (
           <View>
             <Image
-              className="h-60 w-60"
+              className="w-full h-80"
               source={{
                 uri: item.image,
               }}

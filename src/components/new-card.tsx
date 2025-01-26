@@ -35,7 +35,7 @@ export default function NewCard({ item }) {
         <View className="flex-row items-center gap-x-4">
           <View className="flex flex-row items-center gap-x-1">
             <Feather name="message-square" size={24} color="white" />
-            <Text className="text-white">{item?._count.comments}</Text>
+            <Text className="text-white">{item?._count?.comments}</Text>
           </View>
           <View className="flex flex-row items-center gap-x-1">
             <FontAwesome name="whatsapp" size={24} color="white" />

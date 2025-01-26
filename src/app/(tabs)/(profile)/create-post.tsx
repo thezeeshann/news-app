@@ -39,7 +39,7 @@ export default function CreatePost() {
     try {
       const formData = new FormData();
 
-      formData.append("title", data.title);
+      formData.append("title", data.title || "");
       formData.append("content", data.content || "");
       formData.append("authorId", existUser.id);
 
