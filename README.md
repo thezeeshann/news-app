@@ -1,0 +1,37 @@
+# Dailyhunt News app built with React Native and Expo.
+
+## Tech Stack
+
+- [Expo](https://expo.dev) - React Native development platform
+- [Expo Router](https://docs.expo.dev/router/introduction) - File-based routing
+- [NativeWind](https://www.nativewind.dev/) - For styling
+
+
+## Screens
+
+
+|||
+|:---:|:---:|
+| ![](https://github.com/user-attachments/assets/e0c684b7-3453-455b-b8e0-2a034bd416c2) | ![](https://github.com/user-attachments/assets/fd05b339-78c9-4783-baed-1986993e8681)|
+| || 
+| ![](https://github.com/user-attachments/assets/6040e023-d661-45b2-a98b-79ebf4bccc89) | ![](https://github.com/user-attachments/assets/f92b1840-f015-4113-a063-ccd979bd1715)|
+| ||
+
+
+## Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+
+   ```bash
+   npx expo start
+   ```
+
+3. Open in iOS Simulator or Android Emulator:
+   - Press `i` for iOS
+   - Press `a` for Android
