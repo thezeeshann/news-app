@@ -1,7 +1,6 @@
 import { BASE_URL } from "../contant";
-import { postType } from "../schema/post";
 
-export const createPost = async (data: postType, token: string) => {
+export const createPost = async (data: FormData, token: string) => {
   try {
     const response = await fetch(`${BASE_URL}/post/create`, {
       method: "POST",
@@ -21,7 +20,11 @@ export const createPost = async (data: postType, token: string) => {
     const result = await response.json();
     return result.data;
   } catch (error) {
-    console.error("create post API error:", error.message);
+    if (error instanceof Error) {
+      console.error("create post API error:", error.message);
+    } else {
+      console.error("create post API error:", error);
+    }
     throw error;
   }
 };
@@ -62,6 +65,28 @@ export const getSinglePost = async (postId: string) => {
 
     const result = await response.json();
     return result.data;
+  } catch (error) {
+    console.error("post API error:", error);
+    throw error;
+  }
+};
+
+export const getPostByUser = async (token: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/post/get-user`, {
+      method: "GET",
+      headers: {
+        "Content-type": "Application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.error("post API error:", error);
     throw error;
