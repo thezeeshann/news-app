@@ -2,9 +2,17 @@
 
 ## Tech Stack
 
+### Frontend
 - [Expo](https://expo.dev) - React Native development platform
-- [Expo Router](https://docs.expo.dev/router/introduction) - File-based routing
+- [Expo Router](https://docs.expo.dev/router/introduction) - File-based 
 - [NativeWind](https://www.nativewind.dev/) - For styling
+
+### Backend
+- [Node](https://nodejs.org/en) -  JavaScript Runtime Environment
+- [Express](https://expressjs.com/) -  Node.js web application framework
+- [Typescript](https://www.typescriptlang.org/) - Strongly Typed Programming Language
+- [Prisma](https://www.prisma.io/) - Prisma ORM
+- [Zod](https://zod.dev/) - Schema validation libraries
 
 
 ## Screens
