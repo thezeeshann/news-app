@@ -13,6 +13,8 @@
 - [Typescript](https://www.typescriptlang.org/) - Strongly Typed Programming Language
 - [Prisma](https://www.prisma.io/) - Prisma ORM
 - [Zod](https://zod.dev/) - Schema validation libraries
+ 
+[Backend](https://github.com/thezeeshann/news-api) - Check out Backend
 
 
 ## Screens
