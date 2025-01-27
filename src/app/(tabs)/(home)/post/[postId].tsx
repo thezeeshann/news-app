@@ -22,6 +22,7 @@ export default function SinglePost() {
   const [isSaved, setIsSaved] = useState(false);
   const { userData } = useContext(AppContext);
   const { token, existUser } = userData || {};
+  console.log(existUser, "Ex user");
 
   const form = useForm<commentType>({
     resolver: zodResolver(commentSchema),
@@ -74,23 +75,22 @@ export default function SinglePost() {
     }
   };
 
-  useEffect(() => {
-    checkIfPostIsSaved();
-
-    const fetchSingleData = async () => {
-      try {
-        if (!postId) {
-          console.warn("Invalid postId");
-          return;
-        }
-        const data = await getSinglePost(postId);
-        setSinglePost(data);
-      } catch (error) {
-        console.error("Error fetching single post:", error);
+  const fetchSingleData = async () => {
+    try {
+      if (!postId) {
+        console.warn("Invalid postId");
+        return;
       }
-    };
+      const data = await getSinglePost(postId);
+      setSinglePost(data);
+    } catch (error) {
+      console.error("Error fetching single post:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchSingleData();
+    checkIfPostIsSaved();
   }, [postId]);
 
   return (
@@ -131,10 +131,18 @@ export default function SinglePost() {
           </Text>
         </View>
 
-        <View className="flex flex-row items-center justify-between mt-5">
-          <View>
-            <Text className="text-white">{singlePost?.author?.fullName}</Text>
-            <Text className="text-white">1.4 Miilons</Text>
+        <View className="flex flex-row items-center justify-between mt-5 ">
+          <View className="flex flex-row items-center gap-x-4">
+            <Image
+              source={{
+                uri: singlePost?.author?.profile,
+              }}
+              className="w-16 h-16 "
+            />
+            <View className="flex flex-row items-center gap-x-2">
+              <Text className="text-white">{singlePost?.author?.fullName}</Text>
+              <AntDesign name="checkcircleo" size={12} color="white" />
+            </View>
           </View>
           <View className="px-4 py-2 bg-white">
             <Text className="text-black">Follow</Text>
@@ -142,12 +150,19 @@ export default function SinglePost() {
         </View>
 
         <View className="mt-5 ">
-          <Text className="text-lg font-bold text-white">Comments 2</Text>
-          <View className="flex flex-row items-center justify-between mt-5 border-2 border-red-500 gap-x-2">
+          <Text className="text-lg font-bold text-white">
+            Comments{" "}
+            {singlePost?.comments?.length > 0
+              ? singlePost?.comments?.length
+              : "0"}
+          </Text>
+          <View className="flex flex-row items-center justify-between mt-5 gap-x-2">
             <Image
-              className="border-2 border-red-500 rounded-full w-14 h-14"
+              className="w-16 h-16 rounded-full"
               source={{
-                uri: "https://w0.peakpx.com/wallpaper/715/447/HD-wallpaper-muhammad-ali-boxing-fight-mma-ufc-thumbnail.jpg",
+                uri: existUser?.profile
+                  ? existUser.profile
+                  : "../../../../../assets/person2.webp",
               }}
             />
 
@@ -159,9 +174,9 @@ export default function SinglePost() {
               />
               <TouchableOpacity
                 onPress={form.handleSubmit(onSubmit)}
-                className="px-4 py-2 bg-gray-500 border-2 border-red-500"
+                className="px-4 py-2 bg-gray-500 "
               >
-                <Text className="text-white">Reply</Text>
+                <Text className="text-white">Post</Text>
               </TouchableOpacity>
             </FormProvider>
           </View>
@@ -172,16 +187,19 @@ export default function SinglePost() {
             <View className="flex flex-row items-center justify-between ">
               <View className="flex flex-row items-start gap-x-4">
                 <Image
-                  className="border-2 border-white rounded-full w-14 h-14"
+                  className="border-2 border-gray-500 rounded-full w-14 h-14"
                   source={{
-                    uri: "https://w0.peakpx.com/wallpaper/715/447/HD-wallpaper-muhammad-ali-boxing-fight-mma-ufc-thumbnail.jpg",
+                    uri: comment?.user?.profile,
                   }}
                 />
                 <View className="flex flex-col items-center gap-x-2">
                   <Text className="text-lg font-semibold text-white ">
                     {comment?.user?.fullName}
                   </Text>
-                  <Text className="text-sm text-gray-400">10 min ago</Text>
+                  <Text className="text-sm text-gray-400">
+                    {" "}
+                    {comment?.user?.fullName}
+                  </Text>
                 </View>
               </View>
 
