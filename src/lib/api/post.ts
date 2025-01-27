@@ -66,7 +66,7 @@ export const getSinglePost = async (postId: string) => {
     const result = await response.json();
     return result.data;
   } catch (error) {
-    console.error("post API error:", error);
+    console.error("post API error:", error.message);
     throw error;
   }
 };
@@ -78,6 +78,27 @@ export const getPostByUser = async (token: string) => {
       headers: {
         "Content-type": "Application/json",
         Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("post API error:", error);
+    throw error;
+  }
+};
+
+export const deletePost = async (postId: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/post/delete/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
       },
     });
 
