@@ -12,6 +12,19 @@ export default function ManagePost() {
   const { token, existUser } = userData || {};
   const [postsByUser, setPostsByUser] = useState([]);
 
+  const handleDeletePost = async (postId) => {
+    try {
+      const response = await deletePost(postId);
+      if (response.status === 200) {
+        setPostsByUser(postsByUser.filter((p) => p.id !== post.id));
+      } else {
+        console.error("Delete post failed:", response);
+      }
+    } catch (error) {
+      console.error("delete post error:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (existUser && token) {
@@ -43,7 +56,12 @@ export default function ManagePost() {
             <View className="flex flex-col gap-y-1">
               <Text className="text-white">{post.title}</Text>
               <View className="flex flex-row gap-x-4">
-                <FontAwesome name="trash-o" size={24} color="white" />
+                <FontAwesome
+                  onPress={() => handleDeletePost(post.id)}
+                  name="trash-o"
+                  size={24}
+                  color="white"
+                />
                 <Feather name="edit" size={24} color="white" />
               </View>
             </View>
