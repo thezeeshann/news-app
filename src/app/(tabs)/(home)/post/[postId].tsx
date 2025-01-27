@@ -47,12 +47,10 @@ export default function SinglePost() {
     let newSavedPosts;
 
     if (isSaved) {
-      // Remove the post if it's already saved
       newSavedPosts = savedPosts.filter(
         (post: { id: string }) => post.id !== singlePost.id
       );
     } else {
-      // Add the whole post object to the store
       newSavedPosts = [...savedPosts, singlePost];
       console.log("Post saved successfully");
     }
