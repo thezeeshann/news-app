@@ -43,13 +43,17 @@ export default function SinglePost() {
       return;
     }
 
-    const savedPosts = await getDataFromStore("savedPosts");
+    const savedPosts = (await getDataFromStore("savedPosts")) || [];
     let newSavedPosts;
 
     if (isSaved) {
-      newSavedPosts = savedPosts.filter((id: string) => id !== postId);
+      // Remove the post if it's already saved
+      newSavedPosts = savedPosts.filter(
+        (post: { id: string }) => post.id !== singlePost.id
+      );
     } else {
-      newSavedPosts = [...savedPosts, postId];
+      // Add the whole post object to the store
+      newSavedPosts = [...savedPosts, singlePost];
       console.log("Post saved successfully");
     }
 
@@ -157,14 +161,19 @@ export default function SinglePost() {
               : "0"}
           </Text>
           <View className="flex flex-row items-center justify-between mt-5 gap-x-2">
-            <Image
-              className="w-16 h-16 rounded-full"
-              source={{
-                uri: existUser?.profile
-                  ? existUser.profile
-                  : "../../../../../assets/person2.webp",
-              }}
-            />
+            {existUser && token ? (
+              <Image
+                className="w-16 h-16 rounded-full"
+                source={{
+                  uri: existUser.profile,
+                }}
+              />
+            ) : (
+              <Image
+                className="w-16 h-16 rounded-full"
+                source={require("../../../../../assets/person2.webp")}
+              />
+            )}
 
             <FormProvider {...form}>
               <CustomTextInput

@@ -56,13 +56,12 @@ export default function Profile() {
           )}
 
           <View className="flex flex-col">
-            <Text className="font-bold text-white">
+            <Text className="text-lg font-bold text-white">
               {userData ? userData.fullName : "Add you name"}
             </Text>
             <Text className="text-white">
               @{userData ? userData.username : "Add your username"}
             </Text>
-            <Text className="text-white">0 Following</Text>
           </View>
         </View>
 
@@ -123,13 +122,13 @@ export default function Profile() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setTabName("history")}>
+        <TouchableOpacity onPress={() => setTabName("managepost")}>
           <Text
-            className={` ${tabName === "history" ? "text-white" : "text-[#737373]"} text-lg font-bold `}
+            className={` ${tabName === "managepost" ? "text-white" : "text-[#737373]"} text-lg font-bold `}
           >
-            History
+            Manage Post
           </Text>
-          {tabName === "history" ? (
+          {tabName === "managepost" ? (
             <View className="w-full h-[2px] mt-2 bg-white" />
           ) : (
             <View className="w-full h-[2px] mt-2 bg-black" />
@@ -143,7 +142,7 @@ export default function Profile() {
 
       {tabName === "activity" && <Activty />}
 
-      {tabName === "history" && <ManagePost />}
+      {tabName === "managepost" && <ManagePost />}
     </SafeAreaView>
   );
 }
