@@ -4,11 +4,12 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/app-context";
 import { getCommentByUser } from "../lib/api/comment";
+import { CommentType } from "../lib/types";
 
 export default function Activty() {
   const { userData } = useContext(AppContext);
   const { token, existUser } = userData || {};
-  const [commentsByUser, setCommentsByUser] = useState([]);
+  const [commentsByUser, setCommentsByUser] = useState<CommentType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {

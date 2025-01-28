@@ -16,9 +16,10 @@ export default function ManagePost() {
     try {
       const response = await deletePost(postId);
       if (response.status === 200) {
-        setPostsByUser(postsByUser.filter((p) => p.id !== post.id));
-      } else {
-        console.error("Delete post failed:", response);
+        setPostsByUser((prevPosts) => ({
+          ...prevPosts,
+          data: prevPosts.data.filter((post) => post.id !== postId),
+        }));
       }
     } catch (error) {
       console.error("delete post error:", error);
@@ -45,13 +46,13 @@ export default function ManagePost() {
         postsByUser?.data?.map((post) => (
           <View
             key={post.id}
-            className="flex border-gray-500 border-[2px]   flex-row items-center justify-start my-2 gap-x-2"
+            className="flex border-gray-500 border-[2px] flex-row items-center justify-start my-2 gap-x-2"
           >
             <Image
               source={{
                 uri: post.image,
               }}
-              className="w-16 h-16 "
+              className="w-16 h-16"
             />
             <View className="flex flex-col gap-y-1">
               <Text className="text-white">{post.title}</Text>

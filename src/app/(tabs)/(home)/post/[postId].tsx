@@ -15,10 +15,11 @@ import { TouchableOpacity } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { AppContext } from "@/src/context/app-context";
+import { PostType } from "@/src/lib/types";
 
 export default function SinglePost() {
   const { postId } = useLocalSearchParams();
-  const [singlePost, setSinglePost] = useState();
+  const [singlePost, setSinglePost] = useState<PostType | null>();
   const [isSaved, setIsSaved] = useState(false);
   const { userData } = useContext(AppContext);
   const { token, existUser } = userData || {};

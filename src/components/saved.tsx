@@ -3,11 +3,12 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { getDataFromStore } from "../lib/store";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/app-context";
+import { PostType } from "../lib/types";
 
 export default function Saved() {
   const { userData } = useContext(AppContext);
   const { token, existUser } = userData || {};
-  const [savedPosts, setSavePost] = useState([]);
+  const [savedPosts, setSavePost] = useState<PostType[]>([]);
 
   const getSavePost = async () => {
     try {

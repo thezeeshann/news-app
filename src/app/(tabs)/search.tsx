@@ -7,9 +7,10 @@ import { useContext } from "react";
 import { AppContext } from "@/src/context/app-context";
 import { useDebounce } from "@/src/lib/hook";
 import { Link } from "expo-router";
+import { PostType } from "@/src/lib/types";
 
 export default function Search() {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<PostType[]>([]);
   const [seachQuery, setSearchQuery] = useState("");
   const { postData } = useContext(AppContext);
   const debouncedValue = useDebounce(seachQuery);
@@ -42,7 +43,7 @@ export default function Search() {
         <View
           className={`${seachQuery ? "bg-[#333333]" : ""}  w-full p-2 mt-2 `}
         >
-          {results.map((result) => (
+          {results?.map((result) => (
             <Link href={`/post/${result.id}`} key={result.id}>
               <View className="flex flex-row items-center justify-between w-full">
                 <Text className="font-semibold text-white">{result.title}</Text>

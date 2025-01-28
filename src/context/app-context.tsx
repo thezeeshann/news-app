@@ -2,15 +2,15 @@ import { createContext, PropsWithChildren, useState, useEffect } from "react";
 import { getPost } from "../lib/api/post";
 import { getComments } from "../lib/api/comment";
 import { getDataFromStore } from "../lib/store";
-import { signupType } from "../lib/schema/signup";
+import { SignUpType } from "../lib/types";
 
 type AppContextProp = {
   postData: any;
   setPostData: (data: any) => void;
   comments: any;
   setComments: (data: any) => void;
-  userData: signupType | null;
-  setUserData: (data: signupType | null) => void;
+  userData: SignUpType | null;
+  setUserData: (data: SignUpType | null) => void;
 };
 
 export const AppContext = createContext<AppContextProp>({
@@ -23,9 +23,9 @@ export const AppContext = createContext<AppContextProp>({
 });
 
 export default function AppContextProvider({ children }: PropsWithChildren) {
-  const [postData, setPostData] = useState();
-  const [comments, setComments] = useState([]);
-  const [userData, setUserData] = useState<null | signupType>();
+  const [postData, setPostData] = useState<any>(null);
+  const [comments, setComments] = useState<any[]>([]);
+  const [userData, setUserData] = useState<SignUpType | null>(null);
 
   const fetchPostData = async () => {
     try {

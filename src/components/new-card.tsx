@@ -5,8 +5,13 @@ import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { StatusBar } from "expo-status-bar";
 import { Link } from "expo-router";
+import { PostType } from "../lib/types";
 
-export default function NewCard({ item }) {
+interface PostCardProps {
+  item: PostType;
+}
+
+export default function NewCard({ item }: PostCardProps) {
   return (
     <View className="">
       <StatusBar style="light" />
