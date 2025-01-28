@@ -54,7 +54,7 @@ export const getSingleComment = async (commentId: string) => {
         headers: {
           "Content-type": "Application/json",
         },
-      }
+      },
     );
 
     if (!response.ok) {
